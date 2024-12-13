@@ -27,7 +27,7 @@ jobs:
 
       - name: Create Deployment Archive
         run: |
-          zip -r app_deployment.zip .
+          zip -r app.zip .
 
       - name: Transfer Code to EC2
         uses: appleboy/scp-action@v0.1.4
@@ -36,7 +36,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: app_deployment.zip
+          source: app.zip
           target: /home/ubuntu/
 
       - name: Deploy and Setup Application
@@ -48,17 +48,15 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
          
-            mkdir -p /home/ubuntu/app
-            cd /home/ubuntu/
+            mkdir -p /home/ubuntu/codes/app
+            cd /home/ubuntu/codes/app
             
-          
             rm -rf ./*
             
-         
-            unzip -o app_deployment.zip
+            unzip /home/ubuntu/app.zip -d ./
             
-         
-            rm app_deployment.zip
+            rm  -rf /home/ubuntu/app.zip
+            
             
          
             python3 -m venv venv
@@ -97,6 +95,5 @@ jobs:
            
             sudo systemctl status flask-app
 
-      - name: Cleanup Local Zip
-        run: rm app_deployment.zip
+     
 
