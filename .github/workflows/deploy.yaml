@@ -37,7 +37,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: app_deployment.zip
-          target: /home/ubuntu/app
+          target: /home/ubuntu/
 
       - name: Deploy and Setup Application
         uses: appleboy/ssh-action@v1.2.0
@@ -49,16 +49,16 @@ jobs:
           script: |
             # Set up project directory
             mkdir -p /home/ubuntu/app
-            cd /home/ubuntu/app
+            cd /home/ubuntu/
             
             # Remove previous deployment
             rm -rf ./*
             
             # Unzip new deployment
-            unzip -o ~/app/app_deployment.zip
+            unzip -o ~/app_deployment.zip
             
             # Clean up zip file
-            rm ~/app/app_deployment.zip
+            rm ~/app_deployment.zip
             
             # Set up virtual environment
             python3 -m venv venv
