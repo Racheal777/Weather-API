@@ -47,28 +47,28 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            # Set up project directory
+         
             mkdir -p /home/ubuntu/app
             cd /home/ubuntu/
             
-            # Remove previous deployment
+          
             rm -rf ./*
             
-            # Unzip new deployment
+         
             unzip -o ~/app_deployment.zip
             
-            # Clean up zip file
+         
             rm ~/app_deployment.zip
             
-            # Set up virtual environment
+         
             python3 -m venv venv
             source venv/bin/activate
             
-            # Install dependencies AFTER unzipping
+            
             pip install -r requirements.txt
             pip install gunicorn
             
-            # Create systemd service file
+          
             sudo tee /etc/systemd/system/flask-app.service > /dev/null <<EOF
             [Unit]
             Description=Gunicorn Flask Application
@@ -89,12 +89,12 @@ jobs:
             WantedBy=multi-user.target
             EOF
             
-            # Reload systemd, enable and restart the service
+        
             sudo systemctl daemon-reload
             sudo systemctl enable flask-app
             sudo systemctl restart flask-app
             
-            # Optional: Verify the service is running
+           
             sudo systemctl status flask-app
 
       - name: Cleanup Local Zip
