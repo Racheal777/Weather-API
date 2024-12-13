@@ -55,10 +55,10 @@ jobs:
             rm -rf ./*
             
          
-            unzip -o ~/app_deployment.zip
+            unzip -o app_deployment.zip
             
          
-            rm ~/app_deployment.zip
+            rm app_deployment.zip
             
          
             python3 -m venv venv
