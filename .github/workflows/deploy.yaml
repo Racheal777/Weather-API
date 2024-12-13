@@ -78,7 +78,7 @@ jobs:
             User=ubuntu
             Group=ubuntu
             WorkingDirectory=/home/ubuntu/app
-            ExecStart=/home/ubuntu/app/venv/bin/gunicorn \
+            ExecStart=/home/ubuntu/venv/bin/gunicorn \
                 --workers 3 \
                 --bind 0.0.0.0:5000 \
                 --access-logfile - \
