@@ -78,13 +78,13 @@ jobs:
             [Service]
             User=ubuntu
             Group=ubuntu
-            WorkingDirectory=/home/ubuntu/app
-            ExecStart=/home/ubuntu/venv/bin/gunicorn \
+            WorkingDirectory=/home/ubuntu/codes/app
+            ExecStart=/home/ubuntu/codes/app/venv/bin/gunicorn \
                 --workers 3 \
                 --bind 0.0.0.0:5000 \
                 --access-logfile - \
                 --error-logfile - \
-                app:app
+                main:app
 
             [Install]
             WantedBy=multi-user.target
