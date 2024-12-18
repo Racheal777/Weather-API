@@ -23,7 +23,7 @@ def connect_to_db():
         )
     except(Exception, psycopg2.Error) as error:
         print("Error while connecting to postgresql", error)
-        return "f Error while connecting to postgresql", {error}
+        return None
 
 def create_table():
     conn = connect_to_db()
