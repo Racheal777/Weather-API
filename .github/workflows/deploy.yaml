@@ -47,6 +47,9 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            
+            sudo apt update
+            sudo apt install -y python3-pip python3-venv python3-dev libpq-dev build-essential
          
             mkdir -p /home/ubuntu/codes/app
             cd /home/ubuntu/codes/app
