@@ -27,6 +27,11 @@ def connect_to_db():
 
 def create_table():
     conn = connect_to_db()
+
+    if conn is None:
+        print("Failed to connect to the database.")
+        return
+
     cursor = conn.cursor()
     cursor.execute('CREATE TABLE IF NOT EXISTS weather (id Serial PRIMARY KEY, city varchar(255), '
                    'country varchar(255), temperature FLOAT, description TEXT,  date TIMESTAMP DEFAULT NOW())')
